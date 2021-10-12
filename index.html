@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        hr {
+            border-width: 2px;
+        }
+
+        .wrap {
+            margin: 50px auto 0;
+            background-color: lightgray;
+            width: fit-content;
+            padding: 30px;
+            padding-bottom: 10px;
+            border-radius: 15px;
+        }
+
+        .group {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .group input[type="number"] {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .group input[type="checkbox"] {
+            position: relative;
+        }
+
+        .group input[type="checkbox"]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 0;
+            left: 0;
+            border: 2px solid #555555;
+            border-radius: 3px;
+            background-color: white;
+        }
+
+        .group input[type="checkbox"]:checked:after {
+            content: "";
+            display: block;
+            width: 5px;
+            height: 10px;
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: 2px;
+            left: 6px;
+        }
+
+        .btn {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .btn button {
+            font-weight: bold;
+            font-size: 18px;
+            padding: 5px;
+            min-width: 30px;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="group">
+            <input type="number" onchange="changeValue(this.value, 0)">
+            <input type="checkbox">
+        </div>
+
+        <div class="group">
+            <input type="number" onchange="changeValue(this.value, 1)">
+            <input type="checkbox">
+        </div>
+        <div class="group">
+            <input type="number" onchange="changeValue(this.value, 2)">
+            <input type="checkbox">
+        </div>
+        <div class="btn">
+            <button onclick="operator('tambah')">+</button>
+            <button onclick="operator('kurang')">-</button>
+            <button onclick="operator('kali')">x</button>
+            <button onclick="operator('bagi')">/</button>
+        </div>
+        <hr>
+        <p id="result">0</p>
+    </div>
+
+    <script type="text/javascript">
+        var checkboxes = document.querySelectorAll("input[type=checkbox]");
+        //var inputVal = document.querySelectorAll("input[type=number]");
+        var result = document.getElementById("result");
+        var numArr = [];
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                numArr =
+                    Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+                        .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+                        .filter(i => i.value != 'on') // Use Array.filter to remove unchecked checkboxes.
+                        .map(i => parseInt(i.value)) // Use Array.map to extract only the checkbox values from the array of objects.
+                //console.log(numArr);
+            })
+        });
+
+        function changeValue(val, idx) {
+            // change array value based on input value
+            if (checkboxes[idx].checked) {
+                numArr[idx] = val;
+            } else {
+                checkboxes[idx].value = val;
+            }
+            //console.log(numArr);
+        }
+
+        function operator(opt) {
+            var hasil = 0;
+            if (numArr.length > 1) {
+                hasil = numArr[0];
+                for (var i = 1; i < numArr.length; i++) {
+
+                    switch (opt) {
+                        case "tambah":
+                            hasil += numArr[i];
+                            break;
+                        case "kurang":
+                            hasil -= numArr[i];
+                            break;
+                        case "kali":
+                            hasil *= numArr[i];
+                            break;
+                        case "bagi":
+                            hasil /= numArr[i];
+                            break;
+                    }
+
+
+                }
+                result.innerHTML = Math.round(hasil * 100) / 100;
+            } else {
+                result.innerHTML = "Masukan Angka dan<br>Minimal 2 checklist !"
+            }
+        }
+    </script>
+</body>
+
+</html>
