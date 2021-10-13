@@ -113,21 +113,18 @@
     <script type="text/javascript">
         var checkboxes = document.querySelectorAll("input[type=checkbox]");
         var inputVal = document.querySelectorAll("input[type=number]");
-        
         var result = document.getElementById("result");
 
         function operator(opt) {
+            var numArr = []; // reset array
             for (var e = 0; e<inputVal.length; e++){
                 checkboxes[e].value = inputVal[e].value; // change value of checkbox based on input number
+                if(checkboxes[e].checked && checkboxes[e].value != ''){
+                    numArr.push(parseInt(checkboxes[e].value)); // add value to array
+                }
             }
-            var numArr =
-                Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
-                    .filter(i => i.checked && i.value != '') // Use Array.filter to remove unchecked checkboxes.
-                    .map(i => parseInt(i.value)) // Use Array.map to extract only the checkbox values from the array of objects.
-
-            var hasil = 0;
             if (numArr.length > 1) {
-                hasil = numArr[0];
+                var hasil = numArr[0];
 
                 for (var i = 1; i < numArr.length; i++) {
                     
