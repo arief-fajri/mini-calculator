@@ -112,7 +112,7 @@
 
     <script type="text/javascript">
         var checkboxes = document.querySelectorAll("input[type=checkbox]");
-        //var inputVal = document.querySelectorAll("input[type=number]");
+        var inputVal = document.querySelectorAll("input[type=number]");
         var result = document.getElementById("result");
         var numArr = [];
 
@@ -122,48 +122,44 @@
                     Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
                         .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
                         .filter(i => i.value != 'on') // Use Array.filter to remove empty input text.
-                        .map(i => parseInt(i.value)) // Use Array.map to extract only the checkbox values from the array of objects.
+                        .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
                 //console.log(numArr);
             })
         });
 
         function changeValue(val, idx) {
-            // change array value based on input value
-            if (checkboxes[idx].checked) {
-                numArr[idx] = parseInt(val);
-            } else {
-                checkboxes[idx].value = parseInt(val);
-            }
-            //console.log(numArr);
+            checkboxes[idx].checked = false;
+            checkboxes[idx].value = val;
+            
         }
 
         function operator(opt) {
             var hasil = 0;
             if (numArr.length > 1) {
-                hasil = numArr[0];
+                hasil = parseInt(numArr[0]);
+                
                 for (var i = 1; i < numArr.length; i++) {
-
+                    var int = parseInt(numArr[i]);
                     switch (opt) {
                         case "tambah":
-                            hasil += numArr[i];
+                            hasil += int;
                             break;
                         case "kurang":
-                            hasil -= numArr[i];
+                            hasil -= int;
                             break;
                         case "kali":
-                            hasil *= numArr[i];
+                            hasil *= int;
                             break;
                         case "bagi":
-                            hasil /= numArr[i];
+                            hasil /= int;
                             break;
                     }
-
-
                 }
                 result.innerHTML = Math.round(hasil * 100) / 100;
             } else {
                 result.innerHTML = "Masukan Angka dan<br>Minimal 2 checklist !"
             }
+            console.log(numArr);
         }
     </script>
 </body>
