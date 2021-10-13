@@ -121,7 +121,7 @@
                 numArr =
                     Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
                         .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
-                        .filter(i => i.value != 'on') // Use Array.filter to remove unchecked checkboxes.
+                        .filter(i => i.value != 'on') // Use Array.filter to remove empty input text.
                         .map(i => parseInt(i.value)) // Use Array.map to extract only the checkbox values from the array of objects.
                 //console.log(numArr);
             })
