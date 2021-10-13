@@ -88,16 +88,16 @@
 <body>
     <div class="wrap">
         <div class="group">
-            <input type="number" onchange="changeValue(this.value, 0)">
+            <input type="number">
             <input type="checkbox">
         </div>
 
         <div class="group">
-            <input type="number" onchange="changeValue(this.value, 1)">
+            <input type="number">
             <input type="checkbox">
         </div>
         <div class="group">
-            <input type="number" onchange="changeValue(this.value, 2)">
+            <input type="number">
             <input type="checkbox">
         </div>
         <div class="btn">
@@ -112,18 +112,15 @@
 
     <script type="text/javascript">
         var checkboxes = document.querySelectorAll("input[type=checkbox]");
+        var inputVal = document.querySelectorAll("input[type=number]");
         
         var result = document.getElementById("result");
         var numArr = [];
 
-        
-        function changeValue(val, idx) {
-            
-            checkboxes[idx].value = val;
-
-        }
-
         function operator(opt) {
+            for (var e = 0; e<inputVal.length; e++){
+                checkboxes[e].value = inputVal[e].value;
+            }
             numArr =
                 Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
                     .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
