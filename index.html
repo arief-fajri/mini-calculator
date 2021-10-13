@@ -115,16 +115,14 @@
         var inputVal = document.querySelectorAll("input[type=number]");
         
         var result = document.getElementById("result");
-        var numArr = [];
 
         function operator(opt) {
             for (var e = 0; e<inputVal.length; e++){
-                checkboxes[e].value = inputVal[e].value;
+                checkboxes[e].value = inputVal[e].value; // change value of checkbox based on input number
             }
-            numArr =
+            var numArr =
                 Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
                     .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
-                    .filter(i => i.value != 'on') // Use Array.filter to remove empty input text.
                     .filter(i => i.value != '') // Use Array.filter to remove empty input text.
                     .map(i => parseInt(i.value)) // Use Array.map to extract only the checkbox values from the array of objects.
 
