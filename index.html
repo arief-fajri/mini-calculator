@@ -130,9 +130,9 @@
         function changeValue(val, idx) {
             // change array value based on input value
             if (checkboxes[idx].checked) {
-                numArr[idx] = val;
+                numArr[idx] = parseInt(val);
             } else {
-                checkboxes[idx].value = val;
+                checkboxes[idx].value = parseInt(val);
             }
             //console.log(numArr);
         }
