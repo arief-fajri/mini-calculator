@@ -118,7 +118,7 @@
 
         
         function changeValue(val, idx) {
-            //checkboxes[idx].checked = false;
+            
             checkboxes[idx].value = val;
 
         }
@@ -129,26 +129,26 @@
                     .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
                     .filter(i => i.value != 'on') // Use Array.filter to remove empty input text.
                     .filter(i => i.value != '') // Use Array.filter to remove empty input text.
-                    .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+                    .map(i => parseInt(i.value)) // Use Array.map to extract only the checkbox values from the array of objects.
 
             var hasil = 0;
             if (numArr.length > 1) {
-                hasil = parseInt(numArr[0]);
+                hasil = numArr[0];
 
                 for (var i = 1; i < numArr.length; i++) {
-                    var int = parseInt(numArr[i]);
+                    
                     switch (opt) {
                         case "tambah":
-                            hasil += int;
+                            hasil += numArr[i];
                             break;
                         case "kurang":
-                            hasil -= int;
+                            hasil -= numArr[i];
                             break;
                         case "kali":
-                            hasil *= int;
+                            hasil *= numArr[i];
                             break;
                         case "bagi":
-                            hasil /= int;
+                            hasil /= numArr[i];
                             break;
                     }
                 }
